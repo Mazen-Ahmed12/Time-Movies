@@ -1,4 +1,4 @@
-import React, { SetStateAction, useState } from "react";
+import React, { SetStateAction, useContext, useState } from "react";
 import Layout from "../../Layout";
 import {
   Box,
@@ -8,20 +8,31 @@ import {
   Typography,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import MovieTrendList from "../../components/movie-list/movieTrendList";
+import MovieTrendList from "../../components/movie-list/MovieTrendList";
 import MovieList from "../../components/movie-list";
+import { MovieDataType } from "../../assets/data";
+import { MovieContext } from "../../context/MovieContext";
 
 const Home = () => {
   const [search, setSearch] = useState("");
+  const [searchList, setSearchList] = useState<MovieDataType[]>([]);
+  const { state } = useContext(MovieContext);
+  const { movies } = state;
+  const trendingList = movies.filter((item) => item.isTrending === true);
+  const recommendList = movies.filter((item) => item.isTrending !== true);
   const handleSearch = (e: { target: { value: SetStateAction<string> } }) => {
     setSearch(e.target.value);
+    const newlist = movies.filter((movie) =>
+      movie?.title?.toLowerCase()?.includes(search?.trim()?.toLowerCase() || "") //try this if you meet problem with whitespace 
+  );
+  setSearchList(newlist); 
   };
   return (
     <Layout>
       <Box>
         <Paper
           component="form"
-          className="flex justify-center items-center p-1 !bg-[#10141f] border-none"
+          className="flex w-screen justify-center items-center p-1 !bg-[#10141f] border-none"
         >
           <InputBase
             placeholder="type what you want to search Here..."
@@ -43,26 +54,25 @@ const Home = () => {
       </Box>
       <Box className="py-2 px-4">
         {search === "" ? (
-          <Box className="w-full">
-            <Box className="w-full">
+          <Box className="w-full h-full">
+            <Box className="w-full h-full">
               <Typography variant="h5" component="h1" my={6} fontWeight={400}>
-                trending
+                Trending
               </Typography>
               <MovieTrendList trendingList={trendingList} />
             </Box>
-            <Box className="w-full">
+            <Box className="w-full h-full">
               <Typography variant="h5" component="h1" my={6} fontWeight={400}>
-                recommended for you
+                Recommended for you
               </Typography>
               <MovieList recommendList={recommendList} />
             </Box>
           </Box>
         ) : (
-          <Box className="w-full">
-            <Typography>
-              found
-            </Typography>
-            </Box>
+          <Box className="w-full h-full">
+            <Typography>found {searchList.length} results for "{search}"{""}</Typography>
+            <MovieList recommendList={searchList} />
+          </Box>
         )}
       </Box>
     </Layout>

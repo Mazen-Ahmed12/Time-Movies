@@ -1,26 +1,25 @@
-import { ReactNode, createContext, useReducer } from "react";
+import { ReactNode, useReducer } from "react";
 import { MovieDataType, moviesData } from "../assets/data";
+import { initalMovieState } from "./InitalMovieState";
+import { MovieContext } from "./MovieContext";
 
-interface MovieContextProps {
+export interface MovieContextProps {
   children: ReactNode;
 }
 
-interface MovieState {
+export interface MovieState {
   movies: MovieDataType[];
 }
 
-interface MovieAction {
+export interface MovieAction {
   type: string;
   id: string;
 }
 
-const MovieList: MovieDataType[] = moviesData;
+export const MovieList: MovieDataType[] = moviesData;
 
-const initalMovieState: MovieState = {
-  movies: MovieList,
-};
 
-const MovieReducer = (state: MovieState, action: MovieAction): MovieState => {
+export const MovieReducer = (state: MovieState, action: MovieAction): MovieState => {
   switch (action.type) {
     case "TOOGLE BOOKMARK":
       return {
@@ -37,13 +36,7 @@ const MovieReducer = (state: MovieState, action: MovieAction): MovieState => {
   }
 };
 
-export const MovieContext = createContext<{
-  state: MovieState;
-  dispatch: React.Dispatch<MovieAction>;
-}>({
-  state: initalMovieState,
-  dispatch: () => {},
-});
+
 
 export const MovieProvider = ({ children }: MovieContextProps) => {
   const [state, dispatch] = useReducer(MovieReducer, initalMovieState);
