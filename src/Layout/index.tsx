@@ -8,9 +8,9 @@ interface LayoutProps {
 
 const Layout = ({children} : LayoutProps) => {
   return (
-    <Box className="bg-[#10141f]  flex flex-col lg:flex-row text-white p-3 g-3 overflow-hidden h-screen w-screen">
+    <Box className="bg-[#10141f] !w-screen !fixed !inset-0  flex flex-col lg:flex-row text-white p-3 g-3 overflow-overflow-auto h-screen">
       <Sidebar/>
-      <Box className="w-full ml-6">{children}</Box>
+      <Box className="w-auto h-auto overflow-scroll dark-scrollbar px-4">{children}</Box>
     </Box>
     
   )
