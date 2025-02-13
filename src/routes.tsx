@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
     errorElement: <Error />,
   },
   {
-    path: "/bookmarks",
+    path: "/bookmark",
     element: <Bookmark />,
     errorElement: <Error />,
   },
