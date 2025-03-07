@@ -5,8 +5,8 @@ import tailwindcss from "@tailwindcss/vite";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: process.env.NODE_ENV === "production" ? "/Time-Movies/" : "/",
-  optimizeDeps: {
+  base: '/Time-Movies/',
+    optimizeDeps: {
     exclude: ["sw.js"], // Exclude the problematic file
   },
 });
