@@ -8,10 +8,10 @@ import {
   Typography,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import MovieTrendList from "../../components/movie-list/MovieTrendList";
 import MovieList from "../../components/movie-list";
 import { MovieDataType } from "../../assets/data";
 import { MovieContext } from "../../context/MovieContext";
+import MovieTrendList from "../../components/movie-list/movieTrendList";
 
 const Home = () => {
   const [search, setSearch] = useState("");
