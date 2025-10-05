@@ -39,7 +39,7 @@ const Sidebar = () => {
             fontWeight={400}
             fontSize={18}
           >
-            Movie IT
+            Time Movies
           </Typography>
         </Box>
         <Box className="py-0 lx:y-16px flex flex-row lg:flex-col g-4 w-full">
